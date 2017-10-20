@@ -24,7 +24,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(ttf|png)$/, //参考:https://doc.webpack-china.org/loaders/url-loader
+                test: /\.(ttf|png|svg|gif)$/, //参考:https://doc.webpack-china.org/loaders/url-loader
                 use: [{
                         loader: "url-loader"
                     }

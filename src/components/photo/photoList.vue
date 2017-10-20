@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div class="titleContent">
             <!-- 导航栏 -->
             <ul class="navBar">
                 <li @click="getImageData(0)">全 部</li>
@@ -25,6 +25,14 @@
     </div>
 </template>
 <style scoped>
+
+/* 加上这两个样式就可以隐藏滚动条了 */
+.titleContent{
+    overflow: auto;
+}
+.titleContent::-webkit-scrollbar{   
+    width:0;
+}
 .navBar {
     list-style: none;
     white-space: nowrap;

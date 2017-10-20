@@ -44,8 +44,7 @@ export default {
         getInfoData() {
             // this.$route.params.newsId参数要用这个来获取路由传过来的id
             const url = common.apihost + 'api/getnew/' + this.$route.params.newsId
-            this.$http.get(url).then(response => {
-                console.log(response.body)
+            this.$http.get(url).then(response => {                
                 this.infomation = response.body.message[0]
             }, err => {
                 console.log(err)

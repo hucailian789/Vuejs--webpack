@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- 评论子组件 -->
         <div class="subInfo">
             <h4>提交评论</h4>
             <!-- ref="textRef"相当于v-model同样可以监听内容变化 -->
@@ -75,8 +76,7 @@ export default {
     methods: {
         getcommonData: function() { //先获取数据放到页面上去
             const url = common.apihost + 'api/getcomments/' + this.commonId + '?pageindex=' + this.pageIndex
-            this.$http.get(url).then(response => {
-                console.log(response.body.message)
+            this.$http.get(url).then(response => {                
                 if (this.pageIndex == 1) {
                     if (response.body.message.length == 0) {  //如果没有信息就弹出提示框
                         Toast({
@@ -94,7 +94,6 @@ export default {
                             position: 'bottom',
                             duration: 5000
                         });
-
                     } else {
                         this.commonList = this.commonList.concat(response.body.message)
                     }
