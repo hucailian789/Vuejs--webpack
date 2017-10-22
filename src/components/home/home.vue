@@ -1,11 +1,7 @@
 <template>
   <div>
-    <!-- 轮播图 -->
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="(item,index) in sidleArray" :key="index">
-        <a href="item.url"><img :src="item.img" alt="图片正在加载中"></a>
-      </mt-swipe-item>
-    </mt-swipe>
+    <!--1. 轮播图子组件 -->
+    <subswipe lunbo_url="api/getlunbo" :lunbo_time="lunbo_time"></subswipe>
     <!-- 九宫格 -->
     <div class="mui-content">
       <ul class="mui-table-view mui-grid-view mui-grid-9">
@@ -56,23 +52,11 @@
 </template>
 
 <style scoped>
-.mint-swipe {
-  height: 250px;
-}
-
-img {
-  width: 100%;
-  height: 250px;
-}
 
 .mint-swipe-indicator {
   background: green;
   opacity: 1;
 }
-
-
-
-
 
 /* 2.0 九宫格布局样式 */
 
@@ -136,25 +120,19 @@ img {
 
 import common from '../../common/common.js'
 
+//导入轮播子组件
+import subswipe from '../subcomponents/subswipe.vue'
+
 export default ({
   data: function() {
     return {
-      sidleArray: []  //初始化数据
+      lunbo_time: 3000
     }
   },
-  created() {    //Vue框架会在我们的home.vue创建完毕之后自动调用
-    this.getSidleData();
-  },
-  methods: {
-    getSidleData: function() {  //获取轮播数据的方法
-      const url = common.apihost + "api/getlunbo"
-      this.$http.get(url).then(response => {    //发送网络请求
-        this.sidleArray = response.body.message
-      }, err => {
-        console.log(err)
-      })
-    }
+  components: {
+    subswipe
   }
+
 })
 
 

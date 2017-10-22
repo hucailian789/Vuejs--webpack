@@ -3,7 +3,7 @@ import Mint from 'mint-ui' //ui库,像boostrap一样,可以设置各类样式
 import VueRouter from 'vue-router' //路由插件
 import VueResource from 'vue-resource' //路由配套
 import moment from 'moment' //日期格式化插件
-import VuePreview from 'vue-preview'  //一个Vue集成PhotoSwipe图片预览插件
+import VuePreview from 'vue-preview' //一个Vue集成PhotoSwipe图片预览插件
 
 import 'mint-ui/lib/style.css' //导入样式
 import './statics/mui/css/mui.css' //导入样式
@@ -22,7 +22,7 @@ Vue.filter('dateNew', (input, dateString) => {
 Vue.use(Mint)
 Vue.use(VueRouter) //Vue.propertype.$route能获取html里面的  Vue.propertype.$router动态获取js里面的
 Vue.use(VueResource) //Vue.propertype.$http
-Vue.use(VuePreview) 
+Vue.use(VuePreview)
 
 import App from './App.vue' //导入根组件
 
@@ -36,6 +36,9 @@ import infomation from './components/news/infomation.vue'
 import photoList from './components/photo/photoList.vue'
 import photoInfo from './components/photo/photoInfo.vue'
 import buyList from './components/buy/buyList.vue'
+import buyInfo from './components/buy/buyInfo.vue'
+import buyPhotoInfo from './components/buy/buyPhotoInfo.vue'
+import buyShopComment from './components/buy/buyShopComment.vue'
 
 //配置路由
 const router = new VueRouter({
@@ -78,6 +81,19 @@ const router = new VueRouter({
         {
             path: '/buy/buyList',
             component: buyList
+        },
+        {
+            path: '/buy/buyInfo/:goodsId',
+            component: buyInfo
+        },
+        // {
+        //     path: '/buy/buyPhotoInfo',
+        //     component: buyPhotoInfo
+        // },
+        {name:'buyPhotoInfo',path:'/buyPhotoInfo',component:buyPhotoInfo},
+        {
+            path: '/buy/buyShopComment',
+            component: buyShopComment
         }
     ]
 })

@@ -21,6 +21,8 @@
             <mt-tab-item>
                 <router-link to="/shopcart">
                     <img src="http://img08.jiuxian.com/bill/2016/0224/42baf46987b6460bb43b3396e9941653.png">
+                    <!-- 这个叫灰标值,是由buyInfo里的点击数量传递过来的 -->
+                    <span class="badgeStyle" v-show="count!=0">{{count}}</span>
                 </router-link>
             </mt-tab-item>
             <mt-tab-item>
@@ -46,6 +48,8 @@ img {
     margin-top: 40px;
 }
 
+
+
 /* 返回按钮样式 */
 
 .backPro {
@@ -55,29 +59,57 @@ img {
     top: 10px;
     z-index: 99;
 }
+ /**
+  * 购物车徽标的样式
+  */
+  .badgeStyle{
+    font-size: 11px;
+    line-height: 1.3;  
+    position: absolute;
+    top: 7px;
+    left: 63%;
+    text-align: center;
+    padding: 1px 5px; 
+    color: #fff;
+    border-radius: 11px; 
+    background: red;
+  }
+
 
 /* 底部隐藏 ,动态改变显示或隐藏*/
+
 .hideTabBar {
     display: none;
 }
 </style>
 
 <script>
+
+//导入公共的bus
+import bus from './common/commonBus.js'
 export default {
     data() {
         return {
-            isShowBack: false
+            isShowBack: false,
+            count: 0
         }
     },
     created() {
-        this.isShoworHide(this.$route.path)     //然后利用路由监听后就自动触发这个指令.
+        this.isShoworHide(this.$route.path)     //然后利用路由监听后就自动触发这个指令.处理用户强制刷新
+
+        bus.$on('changeToCar', (goodscount) => {         //购物车传值
+            
+            this.count += goodscount
+            console.log('根组件里购物车的数量'+this.count)
+        })
+
     },
     methods: {
         goBack() {
             this.$router.go(-1)     // 后退一步记录，等同于 history.back()
         },
-        isShoworHide(path){             //写一个函数做判断,如果路由的值没有home,就显示底部,并隐藏返回按钮
-             if (path != '/home') {
+        isShoworHide(path) {             //写一个函数做判断,如果路由的值没有home,就显示底部,并隐藏返回按钮
+            if (path != '/home') {
                 this.isShowBack = true
             } else {
                 this.isShowBack = false
@@ -85,8 +117,8 @@ export default {
         }
     },
     watch: {    //通过watch方法来监控路由的变化
-        $route: function(newVul, oldVul) {  
-           this.isShoworHide(newVul.path)       //给上面的函数传值
+        $route: function(newVul, oldVul) {
+            this.isShoworHide(newVul.path)       //给上面的函数传值
         }
     }
 }

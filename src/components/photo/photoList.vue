@@ -28,7 +28,7 @@
 
 /* 加上这两个样式就可以隐藏滚动条了 */
 .titleContent{
-    overflow: auto;
+    overflow-x: auto;
 }
 .titleContent::-webkit-scrollbar{   
     width:0;

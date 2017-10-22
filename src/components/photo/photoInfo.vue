@@ -33,7 +33,7 @@ import common from '../../common/common.js'
 
 //导入子组件
 import subcommon from '../subcomponents/subcommon.vue'
-import photoInfosub from './photoInfosub.vue'
+import photoInfosub from '../subcomponents/photoInfosub.vue'
 
 export default {
   data() {
